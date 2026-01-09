@@ -1,0 +1,43 @@
+TRAVAIL DIRIGÉ (TD) — Tests unitaires & ré-implémentation
+Date : 2026-01-08
+
+Objectif
+--------
+Dans ce projet, certaines méthodes ont été volontairement rendues incomplètes.
+Votre travail consiste à compléter ces méthodes afin que tous les tests unitaires passent.
+
+Consignes
+---------
+1) Ouvrez le projet et exécutez les tests : mvn test
+2) Lisez les tests pour comprendre le comportement attendu.
+3) Implémentez / corrigez les méthodes listées ci-dessous.
+4) Relancez mvn test jusqu'à obtenir un succès.
+
+Contraintes
+-----------
+- Ne modifiez pas les tests.
+- Vous pouvez ajouter du code dans src/main/java si nécessaire.
+- Gardez le comportement cohérent avec les tests.
+
+Méthodes à compléter
+--------------------
+- dirogue.example.MonAventure#estPacifique()  (coupure : totale)
+- dirogue.example.MonAventure#contientDuTresor()  (coupure : totale)
+- dirogue.example.MonAventure#getTresorTotal()  (coupure : totale)
+- dirogue.example.MonAventure#contientBoss()  (coupure : totale)
+- dirogue.example.MonAventure#cheminJusquAuBoss()  (coupure : partielle, 1 instruction(s) conservée(s))
+- dirogue.example.MonAventure#sauvegarderRapport(String)  (coupure : totale)
+- dirogue.example.MonLabyrinthe2#ajouteEntree(Exterieur,Piece)  (coupure : totale)
+- dirogue.example.MonLabyrinthe2#ajouteCorridor(int,int)  (coupure : totale)
+- dirogue.example.MonLabyrinthe2#ajoutePiece(Piece)  (coupure : totale)
+- dirogue.example.MonLabyrinthe2#existeCorridorEntre(Piece,Piece)  (coupure : totale)
+- dirogue.example.MonLabyrinthe2#getPiecesConnectees(Piece)  (coupure : totale)
+- dirogue.example.controllers.MainController#loadTextFile()  (coupure : partielle, 2 instruction(s) conservée(s))
+- dirogue.example.controllers.ReplayController#initializeEncounters(String)  (coupure : totale)
+- dirogue.example.controllers.ReplayController#goForward()  (coupure : totale)
+- dirogue.example.controllers.ReplayController#goBackward()  (coupure : totale)
+
+Rendu attendu
+-------------
+Un projet où tous les tests passent (mvn test).
+

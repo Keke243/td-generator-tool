@@ -1,0 +1,45 @@
+input: "C:/Users/Regine/Downloads/td-generator-tool/TP2-Solution-Full"
+output: "C:/Users/Regine/Downloads/td-generator-tool/TP2-EXERCICE"
+mode: any
+
+methods:
+  # MonAventure (grosses méthodes “logiques”)
+  - id: "dirogue.example.MonAventure#estPacifique()"
+    cut: full
+  - id: "dirogue.example.MonAventure#contientDuTresor()"
+    cut: full
+  - id: "dirogue.example.MonAventure#getTresorTotal()"
+    cut: full
+  - id: "dirogue.example.MonAventure#contientBoss()"
+    cut: full
+  - id: "dirogue.example.MonAventure#cheminJusquAuBoss()"
+    cut: partial
+    keepStatements: 1
+  - id: "dirogue.example.MonAventure#sauvegarderRapport(String)"
+    cut: full
+
+  # MonLabyrinthe2 (construction du graphe)
+  - id: "dirogue.example.MonLabyrinthe2#ajouteEntree(Exterieur,Piece)"
+    cut: full
+  - id: "dirogue.example.MonLabyrinthe2#ajouteCorridor(int,int)"
+    cut: full
+  - id: "dirogue.example.MonLabyrinthe2#ajoutePiece(Piece)"
+    cut: full
+  - id: "dirogue.example.MonLabyrinthe2#existeCorridorEntre(Piece,Piece)"
+    cut: full
+  - id: "dirogue.example.MonLabyrinthe2#getPiecesConnectees(Piece)"
+    cut: full
+
+  # Controller
+  - id: "dirogue.example.controllers.MainController#loadTextFile()"
+    cut: partial
+    keepStatements: 2
+  - id: "dirogue.example.controllers.ReplayController#initializeEncounters(String)"
+    cut: full
+  - id: "dirogue.example.controllers.ReplayController#goForward()"
+    cut: full
+  - id: "dirogue.example.controllers.ReplayController#goBackward()"
+    cut: full
+
+ignoreMissingMethods: false
+exclude: []

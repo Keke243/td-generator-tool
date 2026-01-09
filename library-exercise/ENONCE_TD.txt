@@ -1,0 +1,30 @@
+TRAVAIL DIRIGÉ (TD) — Tests unitaires & ré-implémentation
+Date : 2026-01-07
+
+Objectif
+--------
+Dans ce projet, certaines méthodes ont été volontairement rendues incomplètes.
+Votre travail consiste à compléter ces méthodes afin que tous les tests unitaires passent.
+
+Consignes
+---------
+1) Ouvrez le projet et exécutez les tests : mvn test
+2) Lisez les tests pour comprendre le comportement attendu.
+3) Implémentez / corrigez les méthodes listées ci-dessous.
+4) Relancez mvn test jusqu'à obtenir un succès.
+
+Contraintes
+-----------
+- Ne modifiez pas les tests.
+- Vous pouvez ajouter du code dans src/main/java si nécessaire.
+- Gardez le comportement cohérent avec les tests.
+
+Méthodes à compléter
+--------------------
+- ca.umontreal.library.Library#addBook(Book)  (coupure : totale)
+- ca.umontreal.library.Library#borrowBook(String)  (coupure : partielle, 1 instruction(s) conservée(s))
+
+Rendu attendu
+-------------
+Un projet où tous les tests passent (mvn test).
+

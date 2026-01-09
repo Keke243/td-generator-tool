@@ -1,0 +1,24 @@
+input: "C:/Users/Regine/Downloads/td-generator-tool/library-project"
+output: "C:/Users/Regine/Downloads/td-generator-tool/library-exercise"
+
+# business | any
+mode: any
+
+# 🔥 Mode MANUEL (prioritaire si présent)
+methods:
+  - id: "ca.umontreal.library.Library#addBook(Book)"
+    cut: full
+
+  - id: "ca.umontreal.library.Library#borrowBook(String)"
+    cut: partial
+    keepStatements: 1   # optionnel (par défaut = 1)
+
+# optionnel : si true, ignore une méthode non trouvée (sinon erreur)
+ignoreMissingMethods: false
+
+# mode RANDOM (utilisé seulement si methods est vide)
+random: 3
+
+# exclusions (utile seulement en mode random)
+exclude: []
+excludeFile: ""

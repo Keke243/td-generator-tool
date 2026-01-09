@@ -1,0 +1,4 @@
+{
+  "name": "TD Generator Tool",
+  "description": "A CLI tool to generate Java exercises from reference solutions by stubbing out specific methods."
+}
