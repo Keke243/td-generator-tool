@@ -1,0 +1,5 @@
+# analyzer-config.yaml
+input: "C:\\Users\\Regine\\Downloads\\td-generator-tool\\TP2-Solution-Full"
+output: "C:\\Users\\Regine\\Downloads\\td-generator-tool\\td-config.generated.yaml"
+top: 15
+mode: business   # business|any

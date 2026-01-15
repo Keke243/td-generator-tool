@@ -39,10 +39,7 @@ public class MainController extends ControllerBase {
         this.mainView = (MainView) super.view;
         Button loadButton = mainView.getLoadButton();
         Button replayButton = mainView.getReplayButton();
-        loadButton.setOnAction(event -> loadTextFile());
-        replayButton.setOnAction(e -> {
-            App.showView("Replay", mainView.getTextArea().getText());
-        });
+        throw new UnsupportedOperationException("TODO");
     }
 
     /**
@@ -53,6 +50,24 @@ public class MainController extends ControllerBase {
     private void loadTextFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Load report");
+        File selectedFile = fileChooser.showOpenDialog(mainView.getRoot().getScene().getWindow());
+        if (selectedFile != null) {
+            try {
+                FileReader fileReader = new FileReader(selectedFile);
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
+                String line;
+                StringBuilder content = new StringBuilder();
+                while ((line = bufferedReader.readLine()) != null) {
+                    content.append(line).append("\n");
+                }
+                mainView.getTextArea().setText(content.toString());
+                mainView.getReplayButton().setDisable(false);
+                bufferedReader.close();
+                fileReader.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         throw new UnsupportedOperationException("TODO");
     }
 }

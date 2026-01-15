@@ -29,24 +29,42 @@ public class MonAventure extends Aventure {
     }
 
     public boolean estPacifique() {
+        for (Piece piece : carte.getPieces()) {
+            if (piece.getRencontre().essence() == RencontreType.MONSTRE || piece.getRencontre().essence() == RencontreType.BOSS)
+                return false;
+        }
         throw new UnsupportedOperationException("TODO");
     }
 
     public boolean contientDuTresor() {
+        for (Piece piece : carte.getPieces()) {
+            if (piece.getRencontre().essence() == RencontreType.TRESOR)
+                return true;
+        }
         throw new UnsupportedOperationException("TODO");
     }
 
     public int getTresorTotal() {
-        throw new UnsupportedOperationException("TODO");
+        int count = 0;
+        for (Piece piece : carte.getPieces()) {
+            if (piece.getRencontre().essence() == RencontreType.TRESOR)
+                count++;
+        }
+        return count;
     }
 
     public boolean contientBoss() {
-        throw new UnsupportedOperationException("TODO");
+        for (Piece piece : carte.getPieces()) {
+            if (piece.getRencontre().essence() == RencontreType.BOSS)
+                return true;
+        }
+        return false;
     }
 
     public Piece[] cheminJusquAuBoss() {
         if (!contientBoss())
             return new Piece[0];
+        Piece ext = (Piece) Stream.of(carte.getPieces()).filter(p -> p.getID() == 0).findFirst().get();
         throw new UnsupportedOperationException("TODO");
     }
 
@@ -59,6 +77,7 @@ public class MonAventure extends Aventure {
         } else {
             return findBoss(nextToCheck, newPath);
         }
+        throw new UnsupportedOperationException("TODO");
     }
 
     /**

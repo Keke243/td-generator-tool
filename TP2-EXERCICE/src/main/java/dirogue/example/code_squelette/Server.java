@@ -11,7 +11,9 @@ import java.util.List;
 public class Server {
 
     private ServerSocket server;
+
     private Socket client;
+
     private BufferedReader reader;
 
     private List<EventHandler> handlers = new ArrayList<EventHandler>();
@@ -39,6 +41,7 @@ public class Server {
             this.alertHandlers(cmd, args);
         }
         finalize();
+        throw new UnsupportedOperationException("TODO");
     }
 
     private void alertHandlers(String cmd, String... args) {
@@ -59,7 +62,6 @@ public class Server {
                 args.add(parts[i]);
             }
         }
-
         return args.toArray(new String[0]);
     }
 
@@ -70,5 +72,4 @@ public class Server {
         this.client.close();
         this.server.close();
     }
-
 }

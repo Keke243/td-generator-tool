@@ -42,6 +42,10 @@ public class Config {
 
         public String id;
 
+        // OPTIONNEL : champ ignoré par td-tool mais accepté au parsing YAML
+        // Permet d'avoir score: ... dans le YAML généré par td-analyzer
+        public Double score;
+
         // "full" ou "partial"
         public String cut = "full";
 
@@ -100,6 +104,11 @@ public class Config {
                 mc.cut = mc.cut.trim().toLowerCase();
 
                 if (mc.keepStatements == null) mc.keepStatements = 1;
+
+                // nettoyage optionnel
+                if (mc.score != null && (mc.score.isNaN() || mc.score.isInfinite())) {
+                    mc.score = null;
+                }
             }
 
             return cfg;

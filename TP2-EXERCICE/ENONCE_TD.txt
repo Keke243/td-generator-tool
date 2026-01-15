@@ -1,5 +1,5 @@
 TRAVAIL DIRIGÉ (TD) — Tests unitaires & ré-implémentation
-Date : 2026-01-08
+Date : 2026-01-14
 
 Objectif
 --------
@@ -21,21 +21,21 @@ Contraintes
 
 Méthodes à compléter
 --------------------
-- dirogue.example.MonAventure#estPacifique()  (coupure : totale)
-- dirogue.example.MonAventure#contientDuTresor()  (coupure : totale)
-- dirogue.example.MonAventure#getTresorTotal()  (coupure : totale)
-- dirogue.example.MonAventure#contientBoss()  (coupure : totale)
-- dirogue.example.MonAventure#cheminJusquAuBoss()  (coupure : partielle, 1 instruction(s) conservée(s))
 - dirogue.example.MonAventure#sauvegarderRapport(String)  (coupure : totale)
-- dirogue.example.MonLabyrinthe2#ajouteEntree(Exterieur,Piece)  (coupure : totale)
-- dirogue.example.MonLabyrinthe2#ajouteCorridor(int,int)  (coupure : totale)
-- dirogue.example.MonLabyrinthe2#ajoutePiece(Piece)  (coupure : totale)
-- dirogue.example.MonLabyrinthe2#existeCorridorEntre(Piece,Piece)  (coupure : totale)
-- dirogue.example.MonLabyrinthe2#getPiecesConnectees(Piece)  (coupure : totale)
-- dirogue.example.controllers.MainController#loadTextFile()  (coupure : partielle, 2 instruction(s) conservée(s))
-- dirogue.example.controllers.ReplayController#initializeEncounters(String)  (coupure : totale)
-- dirogue.example.controllers.ReplayController#goForward()  (coupure : totale)
-- dirogue.example.controllers.ReplayController#goBackward()  (coupure : totale)
+- dirogue.example.view.ReplayView#createUI()  (coupure : totale)
+- dirogue.example.view.MainView#createUI()  (coupure : partielle, 5 instruction(s) conservée(s))
+- dirogue.example.controllers.MainController#loadTextFile()  (coupure : partielle, 5 instruction(s) conservée(s))
+- dirogue.example.MonAventure#findBoss(Piece,Piece[])  (coupure : partielle, 4 instruction(s) conservée(s))
+- dirogue.example.controllers.ReplayController#initializeEncounters(String)  (coupure : partielle, 4 instruction(s) conservée(s))
+- dirogue.example.controllers.ReplayController#initialize()  (coupure : partielle, 3 instruction(s) conservée(s))
+- dirogue.example.MonLabyrinthe2#ajouteCorridor(Piece,Piece)  (coupure : partielle, 3 instruction(s) conservée(s))
+- dirogue.example.MonAventure#cheminJusquAuBoss()  (coupure : partielle, 3 instruction(s) conservée(s))
+- dirogue.example.code_squelette.Server#listen()  (coupure : partielle, 3 instruction(s) conservée(s))
+- dirogue.example.controllers.MainController#initialize()  (coupure : partielle, 3 instruction(s) conservée(s))
+- dirogue.example.MonLabyrinthe2#ajouteCorridor(int,int)  (coupure : partielle, 3 instruction(s) conservée(s))
+- dirogue.example.MonAventure#estPacifique()  (coupure : partielle, 3 instruction(s) conservée(s))
+- dirogue.example.controllers.ReplayController#showCurrentMessageAndImage()  (coupure : partielle, 3 instruction(s) conservée(s))
+- dirogue.example.MonAventure#contientDuTresor()  (coupure : partielle, 3 instruction(s) conservée(s))
 
 Rendu attendu
 -------------

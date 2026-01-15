@@ -1,0 +1,65 @@
+input: C:\Users\Regine\Downloads\td-generator-tool\TP2-Solution-Full
+output: C:\Users\Regine\Downloads\td-generator-tool\TP2-EXERCICE
+mode: any
+methods:
+- id: dirogue.example.MonAventure#sauvegarderRapport(String)
+  score: 44.14
+  cut: full
+- id: dirogue.example.view.ReplayView#createUI()
+  score: 38.25
+  cut: full
+- id: dirogue.example.view.MainView#createUI()
+  score: 28.28
+  cut: partial
+  keepStatements: 5
+- id: dirogue.example.controllers.MainController#loadTextFile()
+  score: 27.41
+  cut: partial
+  keepStatements: 5
+- id: dirogue.example.MonAventure#findBoss(Piece,Piece[])
+  score: 20.87
+  cut: partial
+  keepStatements: 4
+- id: dirogue.example.controllers.ReplayController#initializeEncounters(String)
+  score: 20.35
+  cut: partial
+  keepStatements: 4
+- id: dirogue.example.controllers.ReplayController#initialize()
+  score: 17.97
+  cut: partial
+  keepStatements: 3
+- id: dirogue.example.MonLabyrinthe2#ajouteCorridor(Piece,Piece)
+  score: 14.93
+  cut: partial
+  keepStatements: 3
+- id: dirogue.example.MonAventure#cheminJusquAuBoss()
+  score: 14.71
+  cut: partial
+  keepStatements: 3
+- id: dirogue.example.code_squelette.Server#listen()
+  score: 14.4
+  cut: partial
+  keepStatements: 3
+- id: dirogue.example.controllers.MainController#initialize()
+  score: 13.81
+  cut: partial
+  keepStatements: 3
+- id: dirogue.example.MonLabyrinthe2#ajouteCorridor(int,int)
+  score: 13.75
+  cut: partial
+  keepStatements: 3
+- id: dirogue.example.MonAventure#estPacifique()
+  score: 12.99
+  cut: partial
+  keepStatements: 3
+- id: dirogue.example.controllers.ReplayController#showCurrentMessageAndImage()
+  score: 11.38
+  cut: partial
+  keepStatements: 3
+- id: dirogue.example.MonAventure#contientDuTresor()
+  score: 10.99
+  cut: partial
+  keepStatements: 3
+ignoreMissingMethods: false
+exclude: [
+  ]

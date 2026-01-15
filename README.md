@@ -1,29 +1,37 @@
-# Générateur d’exercices Java (TD Tool)
+# Générateur d’exercices Java (TD Generator Tool)
 
-Ce projet présente un outil de génération d’exercices Java à partir d’un projet Maven existant servant de solution de référence.
+Ce projet propose une chaîne d’outils pour la génération automatique d’exercices Java à partir d’un projet Maven existant servant de solution de référence.
 
-L’outil permet de transformer automatiquement un projet Java fonctionnel en projet pédagogique, en retirant le corps de certaines méthodes (au complet ou en partie) tout en conservant l’architecture du projet, les dépendances Maven et le reste du code source intact.
+Il repose sur deux outils complémentaires :
 
-Un énoncé étudiant est également généré afin d’indiquer clairement les méthodes à compléter.
+- **td-analyzer** : outil d’analyse statique qui recommande quelles méthodes sont pédagogiquement pertinentes à couper.
+- **td-tool** : outil de transformation qui génère un projet exercice à partir d’une configuration YAML.
 
-L’outil est conçu pour fonctionner avec tout projet Java Maven standard, indépendamment du domaine applicatif.
+L’objectif est de faciliter la création de travaux dirigés en programmation Java tout en laissant à l’enseignant un contrôle précis sur le contenu pédagogique.
 
 ---
 
 ## Objectif pédagogique
 
-L’objectif principal est de faciliter la création de travaux dirigés en programmation Java, en permettant à un enseignant de partir d’une solution existante, de contrôler précisément quelles méthodes doivent être réimplémentées par les étudiants, et de générer automatiquement un projet prêt à être distribué.
+L’objectif principal est de permettre à un enseignant de :
+
+- partir d’une solution Java fonctionnelle existante ;
+- identifier automatiquement les méthodes intéressantes à faire implémenter par les étudiants ;
+- générer un projet exercice prêt à être distribué ;
+- produire un énoncé étudiant clair et cohérent.
+
+L’approche vise à être reproductible, configurable et indépendante du domaine applicatif.
 
 ---
 
-## Structure générale
+## Structure générale du projet
 
 ```
 td-generator-tool/
-├── td-tool/               # Code source de l’outil
-├── reference-project/     # Projet Java complet (solution)
-├── student-exercise/      # Projet généré pour les étudiants
-├── td-config.yaml         # Configuration de génération
+├── td-analyzer/            # Outil d’analyse et de recommandation
+├── td-tool/                # Outil de génération du projet exercice
+├── TP2-Solution-Full/      # Exemple de projet de référence
+├── td-config.generated.yaml    # Configuration générée par l'outil analyzer
 └── README.md
 ```
 
@@ -31,22 +39,115 @@ td-generator-tool/
 
 ## Prérequis
 
-* Java JDK 17
-* Maven 3.6 ou supérieur
+- Java JDK 17  
+- Maven 3.6 ou supérieur  
 
 ---
 
 ## Dépendances principales
 
-L’outil s’appuie notamment sur les bibliothèques suivantes :
+Les outils s’appuient notamment sur :
 
-* JavaParser (analyse et modification du code source Java)
-* SnakeYAML (lecture du fichier de configuration)
-* Apache PDFBox (génération de l’énoncé étudiant au format PDF)
+- JavaParser : analyse statique du code source Java
+- SnakeYAML : lecture et écriture des fichiers YAML
+- Apache PDFBox : génération de l’énoncé étudiant (PDF)
 
 ---
 
-## Compilation de l’outil
+## Outil 1 — td-analyzer (analyse et recommandation)
+
+### Rôle
+
+td-analyzer analyse statiquement un projet Java Maven et attribue un score pédagogique à chaque méthode selon plusieurs critères :
+
+- taille et structure du code ;
+- complexité (branches, boucles, exceptions, retours) ;
+- dépendances internes ;
+- présence de tests faisant référence à la méthode.
+
+À partir de ces scores, l’outil génère automatiquement un fichier YAML directement exploitable par td-tool.
+
+---
+
+### Modes d’analyse
+
+Le comportement de l’analyse peut être ajusté avec le paramètre `mode`.
+
+#### Mode business (par défaut)
+
+Ce mode filtre les méthodes peu pertinentes pédagogiquement, notamment :
+
+- getters (`getX`)
+- setters (`setX`)
+- méthodes booléennes simples (`isX`)
+
+L’objectif est de privilégier les méthodes contenant une logique métier réelle, plus intéressantes à implémenter pour les étudiants.
+
+Ce mode est recommandé pour les projets applicatifs classiques.
+
+#### Mode any
+
+Dans ce mode, toutes les méthodes sont analysées sans filtrage.
+
+Il est utile pour :
+
+- une analyse exhaustive du projet ;
+- des projets techniques ou atypiques ;
+- laisser un contrôle maximal à l’enseignant lors de la sélection finale.
+
+---
+
+### Compilation de td-analyzer
+
+Depuis le dossier `td-analyzer` :
+
+```
+mvn clean package
+```
+
+---
+
+### Génération automatique d’un fichier YAML
+
+Exemple de commande (sur une seule ligne) :
+
+```
+java -jar target\td-analyzer-1.0.0-jar-with-dependencies.jar --config analyzer-config.yaml
+
+```
+
+Cette commande analyse le projet, sélectionne les méthodes les mieux scorées et génère un fichier YAML prêt à l’emploi.
+
+---
+
+## Outil 2 — td-tool (génération du projet exercice)
+
+### Rôle
+
+td-tool prend en entrée un fichier YAML et :
+
+1. copie intégralement le projet de référence ;
+2. modifie les méthodes sélectionnées (coupure totale ou partielle) ;
+3. conserve l’architecture Maven et les dépendances ;
+4. génère un énoncé étudiant.
+
+---
+
+### Configuration YAML
+
+Le fichier YAML contient notamment :
+
+- `input` : chemin du projet de référence
+- `output` : chemin du projet exercice généré
+- `methods` : méthodes à modifier
+- `cut` : `full` ou `partial`
+- `keepStatements` : nombre d’instructions conservées (si partiel)
+
+Un champ `score` peut être présent à titre informatif. Il est ignoré par td-tool s’il existe.
+
+---
+
+### Compilation de td-tool
 
 Depuis le dossier `td-tool` :
 
@@ -54,57 +155,40 @@ Depuis le dossier `td-tool` :
 mvn clean package
 ```
 
-Cette commande génère un JAR exécutable contenant toutes les dépendances nécessaires.
-
 ---
 
-## Configuration YAML
-
-La génération est pilotée par un fichier `td-config.yaml`.
-
-Les paramètres principaux sont :
-
-* `input` : chemin du projet Maven source
-* `output` : chemin du projet exercice généré
-* `methods` : liste des méthodes à modifier (coupure totale ou partielle)
-
-Ce mécanisme permet de définir précisément le contenu pédagogique de l’exercice.
-
----
-
-## Génération d’un projet exercice
-
-Une fois l’outil compilé, la génération se fait avec la commande suivante :
+### Génération du projet exercice
 
 ```
-java -jar target\td-tool-1.0.0-jar-with-dependencies.jar --config td-config.yaml
+java -jar target\td-tool-1.0.0-jar-with-dependencies.jar --config ..\td-config.generated.yaml
 
 ```
 
-Le projet exercice est alors généré dans le dossier de sortie spécifié.
+Le projet exercice est généré dans le dossier spécifié dans le fichier YAML.
 
 ---
 
 ## Énoncé étudiant
 
-L’outil génère automatiquement un énoncé destiné aux étudiants sous deux formats :
+td-tool génère automatiquement :
 
-* ENONCE_TD.txt
-* ENONCE_TD.pdf
+- ENONCE_TD.txt
+- ENONCE_TD.pdf
 
-Ces fichiers listent les méthodes à compléter ainsi que les consignes générales.
+Ces fichiers décrivent les méthodes à compléter ainsi que les consignes générales.
 
 ---
 
-## Fonctionnement interne (résumé)
+## Fonctionnement global (résumé)
 
-1. Copie complète du projet de référence
-2. Analyse des fichiers Java
-3. Modification ciblée des méthodes sélectionnées
-4. Génération de l’énoncé étudiant
+1. Analyse du projet de référence avec td-analyzer
+2. Génération d’un fichier YAML de recommandations
+3. Ajustement éventuel du YAML par l’enseignant
+4. Génération du projet exercice avec td-tool
+5. Distribution aux étudiants
 
 ---
 
 ## Conclusion
 
-Cet outil propose une approche simple et reproductible pour transformer un projet Java Maven existant en exercice pédagogique configurable, facilitant ainsi la création de travaux dirigés en programmation Java.
+Cette chaîne d’outils propose une approche structurée, reproductible et configurable pour transformer un projet Java Maven existant en exercice pédagogique, tout en laissant à l’enseignant le contrôle final sur le contenu du travail dirigé.

@@ -14,6 +14,7 @@ import javafx.scene.layout.HBox;
  * celui-ci.
  */
 public class MainView extends ViewBase {
+
     /**
      * Racine de la vue principale.
      */
@@ -96,21 +97,9 @@ public class MainView extends ViewBase {
     protected void createUI() {
         root = new VBox();
         root.setPadding(new Insets(10));
-
         HBox buttonBox = new HBox();
         buttonBox.setSpacing(10);
-
         loadButton = new Button("Load");
-        replayButton = new Button("Replay");
-        replayButton.setDisable(true);
-
-        buttonBox.getChildren().addAll(loadButton, replayButton);
-        root.getChildren().addAll(buttonBox, new Label("Report"));
-
-        textArea = new TextArea();
-        textArea.setPrefHeight(400);
-        textArea.setEditable(false);
-        textArea.setWrapText(true);
-        root.getChildren().add(textArea);
+        throw new UnsupportedOperationException("TODO");
     }
 }

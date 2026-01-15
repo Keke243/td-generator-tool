@@ -14,6 +14,7 @@ import javafx.scene.layout.HBox;
  * fonctionnalités de lecture.
  */
 public class ReplayView extends ViewBase {
+
     /**
      * Conteneur principal de la vue de replay.
      */
@@ -122,29 +123,6 @@ public class ReplayView extends ViewBase {
      */
     @Override
     protected void createUI() {
-        rootPane = new VBox();
-        rootPane.setPadding(new Insets(10));
-        rootPane.setSpacing(10);
-        rootPane.setAlignment(javafx.geometry.Pos.CENTER);
-
-        messageLabel = new Label();
-        imageView = new ImageView();
-        imageView.setFitWidth(256);
-        imageView.setFitHeight(256);
-
-        HBox buttonBox1 = new HBox();
-        buttonBox1.setSpacing(10);
-        backwardButton = new Button("Backward");
-        forwardButton = new Button("Forward");
-        buttonBox1.getChildren().addAll(backwardButton, forwardButton);
-        buttonBox1.setAlignment(javafx.geometry.Pos.CENTER);
-
-        HBox buttonBox2 = new HBox();
-        buttonBox2.setSpacing(10);
-        exitButton = new Button("Exit");
-        buttonBox2.getChildren().addAll(exitButton);
-        buttonBox2.setAlignment(javafx.geometry.Pos.CENTER);
-
-        rootPane.getChildren().addAll(messageLabel, imageView, buttonBox1, buttonBox2);
+        throw new UnsupportedOperationException("TODO");
     }
 }

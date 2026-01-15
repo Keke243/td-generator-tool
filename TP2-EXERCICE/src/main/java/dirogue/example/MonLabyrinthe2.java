@@ -42,7 +42,9 @@ public class MonLabyrinthe2 implements Labyrinthe, Serializable {
     }
 
     public void ajouteEntree(Exterieur out, Piece e) {
-        throw new UnsupportedOperationException("TODO");
+        pieces.add(out);
+        pieces.add(e);
+        addEdge(out, e);
     }
 
     /**
@@ -57,9 +59,15 @@ public class MonLabyrinthe2 implements Labyrinthe, Serializable {
         if (getPieceByID(e2.getID()) == null)
             pieces.add(e2);
         addEdge(e1, e2);
+        throw new UnsupportedOperationException("TODO");
     }
 
     public void ajouteCorridor(int e1ID, int e2ID) throws PieceNotFoundException {
+        Piece e1 = getPieceByID(e1ID);
+        Piece e2 = getPieceByID(e2ID);
+        if (e1 == null) {
+            throw new PieceNotFoundException("Piece introuvable...! ID: " + e1ID);
+        }
         throw new UnsupportedOperationException("TODO");
     }
 
@@ -70,11 +78,14 @@ public class MonLabyrinthe2 implements Labyrinthe, Serializable {
      * @return L'index de la pièce ajoutée.
      */
     public int ajoutePiece(Piece e) {
-        throw new UnsupportedOperationException("TODO");
+        if (!pieces.contains(e)) {
+            pieces.add(e);
+        }
+        return pieces.indexOf(e);
     }
 
     public boolean existeCorridorEntre(Piece e1, Piece e2) {
-        throw new UnsupportedOperationException("TODO");
+        return adjList.containsKey(e1.getID()) && adjList.get(e1.getID()).contains(e2.getID());
     }
 
     /**
@@ -84,7 +95,8 @@ public class MonLabyrinthe2 implements Labyrinthe, Serializable {
      * @return Un tableau de pièces connectées à la pièce donnée.
      */
     public Piece[] getPiecesConnectees(Piece e) {
-        throw new UnsupportedOperationException("TODO");
+        var adjNodeIDs = adjList.getOrDefault(e.getID(), new ArrayList<>());
+        return pieces.stream().filter(piece -> adjNodeIDs.contains(piece.getID())).collect(Collectors.toList()).toArray(new Piece[0]);
     }
 
     private void addEdge(Piece e1, Piece e2) {

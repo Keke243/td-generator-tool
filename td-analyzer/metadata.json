@@ -1,0 +1,5 @@
+
+{
+  "name": "td-analyzer",
+  "description": "A Java 17 Maven tool that analyzes source code to suggest which methods should be stubbed for exercises based on pedagogical heuristics, complexity, and dependencies."
+}

@@ -55,9 +55,7 @@ public class ReplayController extends ControllerBase {
         this.replayView = (ReplayView) super.view;
         initializeEncounters(super.data);
         showCurrentMessageAndImage();
-        replayView.getBackwardButton().setOnAction(event -> goBackward());
-        replayView.getForwardButton().setOnAction(event -> goForward());
-        replayView.getExitButton().setOnAction(event -> exit());
+        throw new UnsupportedOperationException("TODO");
     }
 
     /**
@@ -66,6 +64,19 @@ public class ReplayController extends ControllerBase {
      * @param report Le rapport contenant les informations sur les rencontres.
      */
     public void initializeEncounters(String report) {
+        Pattern pattern = Pattern.compile("<\\d+-(\\w+)> :");
+        Matcher matcher = pattern.matcher(report);
+        var list = new ArrayList<Rencontre>();
+        while (matcher.find()) {
+            String className = matcher.group(1);
+            try {
+                Class<?> clazz = Class.forName("dirogue.example.rencontre." + className);
+                Rencontre instance = (Rencontre) clazz.getDeclaredConstructor().newInstance();
+                list.add(instance);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         throw new UnsupportedOperationException("TODO");
     }
 
@@ -82,20 +93,23 @@ public class ReplayController extends ControllerBase {
             ImageView imageView = replayView.getImageView();
             imageView.setImage(image);
         }
+        throw new UnsupportedOperationException("TODO");
     }
 
     /**
      * Méthode pour naviguer vers la rencontre précédente dans le replay.
      */
     private void goBackward() {
-        throw new UnsupportedOperationException("TODO");
+        currentIndex = Math.max(0, currentIndex - 1);
+        showCurrentMessageAndImage();
     }
 
     /**
      * Méthode pour naviguer vers la rencontre suivante dans le replay.
      */
     private void goForward() {
-        throw new UnsupportedOperationException("TODO");
+        currentIndex = Math.min(encounters.length - 1, currentIndex + 1);
+        showCurrentMessageAndImage();
     }
 
     /**
