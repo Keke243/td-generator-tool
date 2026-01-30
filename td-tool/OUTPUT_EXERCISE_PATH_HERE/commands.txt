@@ -1,0 +1,20 @@
+piece 1 monstre
+piece 2 rien
+piece 3 tresor
+piece 4 monstre
+piece 5 boss
+piece 6 tresor
+piece 7 monstre
+piece 8 rien
+CORRIDORS
+corridor 1 0
+corridor 1 2
+corridor 3 2
+corridor 3 4
+corridor 4 5
+corridor 0 5
+corridor 0 6
+corridor 6 7
+corridor 7 8
+corridor 4 8
+FIN

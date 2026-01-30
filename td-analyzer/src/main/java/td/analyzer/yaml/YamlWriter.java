@@ -63,12 +63,9 @@ public class YamlWriter {
     }
 
     private static int computeKeepStatements(double score) {
-        if (score < 5.0) return 1;
-        if (score < 10.0) return 2;
-        if (score < 15.0) return 3;
-        if (score < 20.0) return 3;
-        if (score < 25.0) return 4;
-        return 5; // score < 30.0
+        if (score < 10.0) return 3;
+        if (score < 20.0) return 2;
+        return 1; // score < 30.0
     }
 
     private static double round2(double x) {
